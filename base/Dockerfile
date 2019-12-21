@@ -1,4 +1,5 @@
-# TODO - Parameterize
-FROM alpine:3.11.0
+ARG FROM_IMAGE
+FROM ${FROM_IMAGE}
 
 # TODO - Labels
+# TODO - "apk add curl"

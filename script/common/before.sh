@@ -5,5 +5,5 @@
 # - REF_TAG
 # - BUILD_ID
 
-# These values are unlikely to change from project to project
 export BUILD_IMAGE=${BASE_BUILD_IMAGE}/${VARIANT}:${REF_TAG}-${BUILD_ID}
+export FROM_IMAGE="alpine:3.11.0"
