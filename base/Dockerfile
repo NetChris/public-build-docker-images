@@ -19,7 +19,7 @@ ARG IMAGE_SOURCE_REPOSITORY
 LABEL org.opencontainers.image.url="${IMAGE_SOURCE_REPOSITORY}"
 
 # TODO - Document curl as a package in the image
-RUN apk add curl=7.55.0-r2
+RUN apk add curl=7.67.0-r0
 
 ARG IMAGE_TITLE
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
