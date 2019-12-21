@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export BASE_BUILD_IMAGE="registry.gitlab.com/cssl/netchris/public/build/docker/alpine/image"
+export BASE_BUILD_IMAGE="registry.gitlab.com/cssl/netchris/public/build/docker/images"
 export REF_TAG=local
 EPOCH=$(date +%s)
 export BUILD_ID=$EPOCH
