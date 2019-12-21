@@ -25,9 +25,9 @@ after_script:
     - ./script/common/push.sh
   allow_failure: false
 
-Build and Push - base:
+Build and Push - Alpine:
   stage: Build and Push Image
   variables:
-    VARIANT: base
+    VARIANT: alpine
   extends: 
     - .build-and-push
