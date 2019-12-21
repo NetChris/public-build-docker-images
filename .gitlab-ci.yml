@@ -10,6 +10,8 @@ variables:
   BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
   REF_TAG: ${CI_COMMIT_REF_NAME}
   BUILD_ID: ${CI_PIPELINE_ID}
+  IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+  IMAGE_REVISION: ${CI_COMMIT_SHA}
 
 before_script:
   - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
