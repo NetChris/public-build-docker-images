@@ -1,0 +1,29 @@
+---
+image: docker:19.03.1
+services:
+  - docker:19.03.1-dind
+
+stages:
+  - Build and Push Image
+
+variables:
+  BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+  REF_TAG: ${CI_COMMIT_REF_NAME}
+  BUILD_ID: ${CI_PIPELINE_ID}
+
+before_script:
+  - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
+
+after_script:
+  - docker logout $CI_REGISTRY
+
+.build-and-push:
+  script:
+    - ./script/build.sh
+    - ./script/push.sh
+  allow_failure: false
+
+Build and Push:
+  stage: Build and Push Image
+  extends: 
+    - .build-and-push
