@@ -19,8 +19,8 @@ after_script:
 
 .build-and-push:
   script:
-    - ./script/build.sh
-    - ./script/push.sh
+    - ./script/common/build.sh
+    - ./script/common/push.sh
   allow_failure: false
 
 Build and Push - base:
