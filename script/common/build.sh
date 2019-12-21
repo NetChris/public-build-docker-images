@@ -1,4 +1,9 @@
 #!/bin/sh
+# Requires
+# - VARIANT
+# - BASE_BUILD_IMAGE
+# - REF_TAG
+# - BUILD_ID
 
 . "./script/common/before.sh"
 
