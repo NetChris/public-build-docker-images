@@ -23,7 +23,9 @@ after_script:
     - ./script/push.sh
   allow_failure: false
 
-Build and Push:
+Build and Push - base:
   stage: Build and Push Image
+  variables:
+    VARIANT: base
   extends: 
     - .build-and-push

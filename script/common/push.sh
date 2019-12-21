@@ -1,5 +1,5 @@
 #!/bin/sh
 
-. "./script/before.sh"
+. "./script/common/before.sh"
 
 docker image push ${BUILD_IMAGE}
