@@ -5,6 +5,6 @@
 # - BUILD_ID
 # - Login to the registry in BASE_BUILD_IMAGE, if it requires auth
 
-. "./script/common/before.sh"
+. "./common/before.sh"
 
 docker image push ${BUILD_IMAGE}

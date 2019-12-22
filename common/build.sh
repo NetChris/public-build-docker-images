@@ -6,10 +6,7 @@
 # - REF_TAG
 # - BUILD_ID
 
-. "./script/${VARIANT}/before.sh"
-. "./script/common/before.sh"
-
-# TODO - Labels
+. "./common/before.sh"
 
 docker image build \
   -t ${BUILD_IMAGE} \
