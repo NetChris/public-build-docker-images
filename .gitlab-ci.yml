@@ -47,3 +47,13 @@ Test - Alpine:
     - .test
   script:
     - curl -X GET https://docker.loc.network/
+
+Test - Docker:
+  image: ${CI_REGISTRY_IMAGE}/docker:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
+  stage: Tests
+  variables:
+    VARIANT: alpine
+  extends: 
+    - .test
+  script:
+    - docker info
