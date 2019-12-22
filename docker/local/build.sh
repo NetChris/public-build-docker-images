@@ -1,3 +1,4 @@
 #!/bin/sh
 
-. "./images/docker/build.sh"
+. "./alpine/before.sh"
+. "./common/local/build.sh"

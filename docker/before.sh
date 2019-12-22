@@ -1,6 +1,7 @@
 #!/bin/sh
 # Variables specific to "alpine" variant
 
-export VARIANT="alpine"
-export IMAGE_TITLE="Alpine-based Docker Image for build/deploy"
-export IMAGE_PRODUCT_ID="cssl/netchris/public/build/docker/images/alpine"
+export VARIANT="docker"
+export IMAGE_TITLE="Docker Image for build/deploy - Docker variant"
+export FROM_IMAGE="docker:stable"
+export IMAGE_VENDOR="Alpine Linux Development Team"

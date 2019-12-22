@@ -1,7 +1,5 @@
-# TODO - 
-# ARG FROM_IMAGE
-# FROM ${FROM_IMAGE}
-FROM docker:stable
+ARG FROM_IMAGE
+FROM ${FROM_IMAGE}
 
 ARG FROM_IMAGE
 LABEL com.netchris.image.from="${FROM_IMAGE}"
@@ -19,6 +17,9 @@ LABEL org.opencontainers.image.vendor="${IMAGE_VENDOR}"
 
 ARG IMAGE_SOURCE_REPOSITORY
 LABEL org.opencontainers.image.url="${IMAGE_SOURCE_REPOSITORY}"
+
+# TODO - Document curl as a package in the image
+RUN apk add curl=7.67.0-r0
 
 ARG IMAGE_TITLE
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
