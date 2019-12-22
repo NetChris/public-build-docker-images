@@ -1,4 +1,4 @@
 #!/bin/sh
 
-. "./script/local/alpine/build.sh"
+. "./alpine/local/build.sh"
 . "./script/local/push.sh"

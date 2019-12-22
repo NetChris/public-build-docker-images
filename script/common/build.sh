@@ -6,7 +6,7 @@
 # - REF_TAG
 # - BUILD_ID
 
-. "./script/${VARIANT}/before.sh"
+. "./${VARIANT}/before.sh"
 . "./script/common/before.sh"
 
 # TODO - Labels
