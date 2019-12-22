@@ -31,6 +31,13 @@ Build and Push - Alpine:
   extends: 
     - .build-and-push
 
+Build and Push - Docker:
+  stage: Build and Push Image
+  variables:
+    VARIANT: docker
+  extends: 
+    - .build-and-push
+
 Test - Alpine:
   image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
   stage: Tests
