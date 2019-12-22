@@ -22,8 +22,6 @@ variables:
     - docker logout $CI_REGISTRY
 
 .test:
-  when: manual
-  allow_failure: false
   tags:
     - NetChris
 
