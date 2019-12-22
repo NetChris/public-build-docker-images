@@ -11,19 +11,15 @@ variables:
   IMAGE_REVISION: ${CI_COMMIT_SHA}
   BUILD_IMAGE: ${BASE_BUILD_IMAGE}/${VARIANT}:${REF_TAG}-${BUILD_ID}
 
-before_script:
-  - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
-
-after_script:
-  - docker logout $CI_REGISTRY
-
 .build-and-push:
   image: docker:19.03.1
   services:
     - docker:19.03.1-dind
   script:
     - ./script/common/build.sh
+    - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
     - ./script/common/push.sh
+    - docker logout $CI_REGISTRY
 
 .test:
   when: manual
