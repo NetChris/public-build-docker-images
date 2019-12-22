@@ -1,4 +1,4 @@
 #!/bin/sh
 
-export VARIANT="alpine"
-. "./script/local/build.sh"
+. "./alpine/before.sh"
+. "./common/local/build.sh"

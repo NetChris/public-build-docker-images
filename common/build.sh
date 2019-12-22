@@ -7,7 +7,7 @@
 # - BUILD_ID
 
 . "./${VARIANT}/before.sh"
-. "./script/common/before.sh"
+. "./common/before.sh"
 
 # TODO - Labels
 

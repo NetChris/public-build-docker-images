@@ -16,9 +16,9 @@ variables:
   services:
     - docker:19.03.1-dind
   script:
-    - ./script/common/build.sh
+    - ./common/build.sh
     - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
-    - ./script/common/push.sh
+    - ./common/push.sh
     - docker logout $CI_REGISTRY
 
 .test:
