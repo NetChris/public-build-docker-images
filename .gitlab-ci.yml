@@ -1,10 +1,7 @@
 ---
-image: docker:19.03.1
-services:
-  - docker:19.03.1-dind
-
 stages:
   - Build and Push Image
+  - Tests
 
 variables:
   BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
@@ -12,18 +9,21 @@ variables:
   BUILD_ID: ${CI_PIPELINE_ID}
   IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
   IMAGE_REVISION: ${CI_COMMIT_SHA}
-
-before_script:
-  - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
-
-after_script:
-  - docker logout $CI_REGISTRY
+  BUILD_IMAGE: ${BASE_BUILD_IMAGE}/${VARIANT}:${REF_TAG}-${BUILD_ID}
 
 .build-and-push:
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
   script:
     - ./script/common/build.sh
+    - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
     - ./script/common/push.sh
-  allow_failure: false
+    - docker logout $CI_REGISTRY
+
+.test:
+  tags:
+    - NetChris
 
 Build and Push - Alpine:
   stage: Build and Push Image
@@ -31,3 +31,13 @@ Build and Push - Alpine:
     VARIANT: alpine
   extends: 
     - .build-and-push
+
+Test - Alpine:
+  image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
+  stage: Tests
+  variables:
+    VARIANT: alpine
+  extends: 
+    - .test
+  script:
+    - curl -X GET https://docker.loc.network/
