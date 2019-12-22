@@ -2,5 +2,5 @@
 # Requires:
 # - VARIANT
 
-. "./common/local/before.sh"
+. "./common/local/variables.sh"
 . "./common/build.sh"
