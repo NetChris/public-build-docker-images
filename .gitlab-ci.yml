@@ -9,16 +9,15 @@ variables:
   BUILD_ID: ${CI_PIPELINE_ID}
   IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
   IMAGE_REVISION: ${CI_COMMIT_SHA}
-  BUILD_IMAGE: ${BASE_BUILD_IMAGE}/${VARIANT}:${REF_TAG}-${BUILD_ID}
 
-.build-and-push:
+.build-then-push:
   image: docker:19.03.1
   services:
     - docker:19.03.1-dind
   script:
-    - ./script/common/build.sh
+    - ./common/build.sh
     - echo "${CI_REGISTRY_PASSWORD}" | docker login --username ${CI_REGISTRY_USER} --password-stdin $CI_REGISTRY
-    - ./script/common/push.sh
+    - ./common/push.sh
     - docker logout $CI_REGISTRY
 
 .test:
@@ -30,14 +29,27 @@ Build and Push - Alpine:
   variables:
     VARIANT: alpine
   extends: 
-    - .build-and-push
+    - .build-then-push
+
+Build and Push - Docker:
+  stage: Build and Push Image
+  variables:
+    VARIANT: docker
+  extends: 
+    - .build-then-push
 
 Test - Alpine:
   image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
   stage: Tests
-  variables:
-    VARIANT: alpine
   extends: 
     - .test
   script:
     - curl -X GET https://docker.loc.network/
+
+Test - Docker:
+  image: ${CI_REGISTRY_IMAGE}/docker:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
+  stage: Tests
+  extends: 
+    - .test
+  script:
+    - docker info
