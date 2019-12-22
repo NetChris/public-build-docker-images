@@ -41,8 +41,6 @@ Build and Push - Docker:
 Test - Alpine:
   image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
   stage: Tests
-  variables:
-    VARIANT: alpine
   extends: 
     - .test
   script:
@@ -51,8 +49,6 @@ Test - Alpine:
 Test - Docker:
   image: ${CI_REGISTRY_IMAGE}/docker:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
   stage: Tests
-  variables:
-    VARIANT: docker
   extends: 
     - .test
   script:
