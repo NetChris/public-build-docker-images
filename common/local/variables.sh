@@ -7,5 +7,3 @@ export BUILD_ID=$EPOCH
 export IMAGE_REVISION=$BUILD_ID
 export CI_REGISTRY=registry.gitlab.com
 export IMAGE_SOURCE_REPOSITORY="https://gitlab.com/cssl/NetChris/public/build/docker/images"
-
-. "./${VARIANT}/variables.sh"

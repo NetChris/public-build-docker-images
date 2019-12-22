@@ -8,8 +8,6 @@
 
 . "./common/before.sh"
 
-# TODO - Labels
-
 docker image build \
   -t ${BUILD_IMAGE} \
   -f ./${VARIANT}/Dockerfile \

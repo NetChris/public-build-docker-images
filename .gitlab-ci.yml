@@ -10,7 +10,7 @@ variables:
   IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
   IMAGE_REVISION: ${CI_COMMIT_SHA}
 
-.build-and-push:
+.build-then-push:
   image: docker:19.03.1
   services:
     - docker:19.03.1-dind
@@ -29,14 +29,14 @@ Build and Push - Alpine:
   variables:
     VARIANT: alpine
   extends: 
-    - .build-and-push
+    - .build-then-push
 
 Build and Push - Docker:
   stage: Build and Push Image
   variables:
     VARIANT: docker
   extends: 
-    - .build-and-push
+    - .build-then-push
 
 Test - Alpine:
   image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
