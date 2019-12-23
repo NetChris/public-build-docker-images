@@ -52,4 +52,4 @@ Test - Docker:
   extends: 
     - .test
   script:
-    - docker info
+    - /opt/scripts/netchris/test.sh
