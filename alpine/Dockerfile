@@ -19,7 +19,13 @@ ARG IMAGE_SOURCE_REPOSITORY
 LABEL org.opencontainers.image.url="${IMAGE_SOURCE_REPOSITORY}"
 
 # TODO - Document curl as a package in the image
+# This adds 3MB to the package
 RUN apk add curl=7.67.0-r0
+
+# gettext because we want envsubst
+# TODO - Document gettext as a package in the image
+# This adds 8MB to the package
+RUN apk add gettext
 
 ARG IMAGE_TITLE
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"

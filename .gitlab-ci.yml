@@ -45,6 +45,7 @@ Test - Alpine:
     - .test
   script:
     - curl -X GET https://docker.loc.network/
+    - envsubst -V
 
 Test - Docker:
   image: ${CI_REGISTRY_IMAGE}/docker:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
