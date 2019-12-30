@@ -1,4 +1,6 @@
 #!/bin/sh
 # Test script
 
-echo "Success!"
+. "/opt/scripts/netchris/include.sh"
+
+test_me
