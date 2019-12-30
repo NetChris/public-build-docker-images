@@ -49,7 +49,10 @@ Tests - Alpine:
 Tests - Docker:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
   stage: Tests
+  variables:
+    VARIANT: docker
   extends: 
     - .test
   script:
     - ./docker/tests.sh
+    - ./common/build.sh
