@@ -3,4 +3,4 @@
 
 . "/opt/scripts/netchris/include.sh"
 
-test_function
+test_function_and_variable

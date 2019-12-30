@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test_function() {
+test_function_and_variable() {
   # Assumes that TEST_VALUE has been exported
-  echo "Success 20191230103501! - ${TEST_VALUE}"
+  echo "Success - ${TEST_VALUE}"
 }

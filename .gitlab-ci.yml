@@ -38,7 +38,7 @@ Build and Push - Docker:
   extends: 
     - .build-then-push
 
-Test - Alpine:
+Tests - Alpine:
   image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
   stage: Tests
   extends: 
@@ -46,10 +46,10 @@ Test - Alpine:
   script:
     - curl -X GET https://docker.loc.network/
 
-Test - Docker:
+Tests - Docker:
   image: ${CI_REGISTRY_IMAGE}/docker:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
   stage: Tests
   extends: 
     - .test
   script:
-    - /opt/scripts/netchris/tests.sh
+    - /docker/tests.sh
