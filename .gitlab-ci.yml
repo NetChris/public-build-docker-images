@@ -44,7 +44,7 @@ Tests - Alpine:
   extends: 
     - .test
   script:
-    - curl -X GET https://docker.loc.network/
+    - curl -X GET https://${CI_REGISTRY}
 
 Tests - Docker:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
