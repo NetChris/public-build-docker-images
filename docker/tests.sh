@@ -5,6 +5,8 @@
 
 test_function_and_variable
 
+# Redefine the variable
 export IMAGE_BUILD_DATE="newdefinition"
 
+# ... and ensure the function picks it up
 test_function_and_variable

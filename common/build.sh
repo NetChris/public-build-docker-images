@@ -6,18 +6,10 @@
 # - REF_TAG
 # - BUILD_ID
 
-. "./common/before.sh"
+. "./common/variables.sh"
 
-docker image build \
-  -t ${BUILD_IMAGE} \
-  -f ./${VARIANT}/Dockerfile \
-  --build-arg FROM_IMAGE \
-  --build-arg IMAGE_AUTHORS \
-  --build-arg IMAGE_VENDOR \
-  --build-arg IMAGE_TITLE \
-  --build-arg IMAGE_PRODUCT_ID \
-  --build-arg IMAGE_SOURCE_REPOSITORY \
-  --build-arg IMAGE_REVISION \
-  --build-arg IMAGE_BUILD_ID \
-  --build-arg IMAGE_BUILD_DATE \
-  ./${VARIANT}/
+. "./docker/build_scripts/variables.sh"
+
+. "./docker/build_scripts/functions.sh"
+
+docker_image_build
