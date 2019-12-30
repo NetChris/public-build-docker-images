@@ -21,6 +21,7 @@ variables:
     - docker logout $CI_REGISTRY
 
 .test:
+  stage: Tests
   tags:
     - NetChris
 
@@ -40,19 +41,22 @@ Build and Push - Docker:
 
 Tests - Alpine:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/alpine:${CI_PIPELINE_ID}
-  stage: Tests
   extends: 
     - .test
   script:
     - curl -X GET https://${CI_REGISTRY}
 
-Tests - Docker:
+# Run a test that essentially re-builds the Docker image _inside_ the newly-pushed Docker image. INCEPTION!!!! :)
+Tests - Docker Build:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
-  stage: Tests
   variables:
     VARIANT: docker
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
+    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+    IMAGE_REVISION: ${CI_COMMIT_SHA}
   extends: 
     - .test
   script:
-    - ./docker/tests.sh
     - ./common/build.sh

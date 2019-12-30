@@ -1,10 +1,5 @@
 #!/bin/sh
 
-test_function_and_variable() {
-  # Assumes that IMAGE_BUILD_DATE has been exported
-  echo "Success - ${IMAGE_BUILD_DATE}"
-}
-
 # Build a Docker image with NetChris-standard variables:
 #  BUILD_IMAGE
 #  VARIANT
