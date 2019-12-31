@@ -59,4 +59,4 @@ Tests - Docker Build:
   extends: 
     - .test
   script:
-    - ./common/build.sh
+    - ./docker/test-build.sh

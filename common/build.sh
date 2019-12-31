@@ -6,6 +6,9 @@
 # - REF_TAG
 # - BUILD_ID
 
+# Activate "strict" settings
+. "./docker/build_scripts/strict.sh"
+
 . "./common/variables.sh"
 
 # We use the scripts from the Docker variant as they will be used similarly from the end-use builds
