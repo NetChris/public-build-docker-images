@@ -3,6 +3,10 @@ stages:
   - Build and Push Image
   - Tests
 
+variables:
+  ALPINE_IMAGE_TEST: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/alpine:${CI_PIPELINE_ID}
+  DOCKER_IMAGE_TEST: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
+
 .build-then-push:
   image: docker:19.03.1
   services:
@@ -47,7 +51,7 @@ Build and Push - Docker:
     - .build-then-push
 
 Tests - Alpine:
-  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/alpine:${CI_PIPELINE_ID}
+  image: ${ALPINE_IMAGE_TEST}
   extends: 
     - .test
   script:
@@ -55,7 +59,7 @@ Tests - Alpine:
     - envsubst -V
 
 Tests - Docker Build:
-  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
+  image: ${DOCKER_IMAGE_TEST}
   extends: 
     - .test
   script:
