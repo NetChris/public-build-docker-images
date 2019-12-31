@@ -2,11 +2,11 @@
 # Tests that can safely be run to ensure proper script configuration.
 
 # Activate "strict" settings
-. "/opt/scripts/netchris/strict.sh"
+. "/opt/netchris/build/docker/scripts/strict.sh"
 
 . "./common/variables.sh"
 
-. "/opt/scripts/netchris/variables/docker-build.sh"
-. "/opt/scripts/netchris/functions/docker.sh"
+. "/opt/netchris/build/docker/scripts/variables/build.sh"
+. "/opt/netchris/build/docker/scripts/functions/docker.sh"
 
 docker_image_build

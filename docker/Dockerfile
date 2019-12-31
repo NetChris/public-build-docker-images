@@ -24,7 +24,8 @@ LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
 ARG IMAGE_PRODUCT_ID
 LABEL com.netchris.image.productid="${IMAGE_PRODUCT_ID}"
 
-COPY build_scripts/ /opt/scripts/netchris
+COPY ../common/build_scripts /opt/netchris/build/common/scripts
+COPY build_scripts/ /opt/netchris/build/docker/scripts
 
 ARG IMAGE_REVISION
 LABEL org.opencontainers.image.revision="${IMAGE_REVISION}"

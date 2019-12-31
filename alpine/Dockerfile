@@ -18,14 +18,19 @@ LABEL org.opencontainers.image.vendor="${IMAGE_VENDOR}"
 ARG IMAGE_SOURCE_REPOSITORY
 LABEL org.opencontainers.image.url="${IMAGE_SOURCE_REPOSITORY}"
 
-# TODO - Document curl as a package in the image
-RUN apk add curl=7.67.0-r0
-
 ARG IMAGE_TITLE
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
 
 ARG IMAGE_PRODUCT_ID
 LABEL com.netchris.image.productid="${IMAGE_PRODUCT_ID}"
+
+# TODO - Document curl as a package in the image
+RUN apk --no-cache update \
+	&& apk add --no-cache \
+    curl=7.67.0-r0
+
+COPY ../common/build_scripts /opt/netchris/build/common/scripts
+COPY build_scripts/ /opt/netchris/build/alpine/scripts
 
 ARG IMAGE_REVISION
 LABEL org.opencontainers.image.revision="${IMAGE_REVISION}"
