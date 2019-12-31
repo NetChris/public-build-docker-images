@@ -6,8 +6,7 @@
 # - REF_TAG
 # - BUILD_ID
 
-# Activate "strict" settings
-. "./common/build_scripts/strict.sh"
+. "./docker/image_root/opt/netchris/build/scripts/common/sets.sh"
 
 . "./common/variables.sh"
 
