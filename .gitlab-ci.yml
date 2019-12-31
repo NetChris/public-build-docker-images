@@ -3,13 +3,6 @@ stages:
   - Build and Push Image
   - Tests
 
-variables:
-  BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
-  REF_TAG: ${CI_COMMIT_REF_NAME}
-  BUILD_ID: ${CI_PIPELINE_ID}
-  IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
-  IMAGE_REVISION: ${CI_COMMIT_SHA}
-
 .build-then-push:
   image: docker:19.03.1
   services:
@@ -21,6 +14,7 @@ variables:
     - docker logout $CI_REGISTRY
 
 .test:
+  stage: Tests
   tags:
     - NetChris
 
@@ -28,6 +22,13 @@ Build and Push - Alpine:
   stage: Build and Push Image
   variables:
     VARIANT: alpine
+
+    # We repeat variables to ensure that the test jobs reflect the variables required for building
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
+    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+    IMAGE_REVISION: ${CI_COMMIT_SHA}
   extends: 
     - .build-then-push
 
@@ -35,22 +36,40 @@ Build and Push - Docker:
   stage: Build and Push Image
   variables:
     VARIANT: docker
+
+    # We repeat variables to ensure that the test jobs reflect the variables required for building
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
+    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+    IMAGE_REVISION: ${CI_COMMIT_SHA}
   extends: 
     - .build-then-push
 
-Test - Alpine:
-  image: ${CI_REGISTRY_IMAGE}/alpine:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
-  stage: Tests
+Tests - Alpine:
+  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/alpine:${CI_PIPELINE_ID}
   extends: 
     - .test
   script:
-    - curl -X GET https://docker.loc.network/
+    - curl -X GET https://${CI_REGISTRY}
     - envsubst -V
 
-Test - Docker:
-  image: ${CI_REGISTRY_IMAGE}/docker:${CI_COMMIT_REF_NAME}-${CI_PIPELINE_ID}
-  stage: Tests
+Tests - Docker Build:
+  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
+  variables:
+    # These variables can be considered the baseline requirements for building
+    # See https://gitlab.com/cssl/NetChris/public/build/docker/images/-/wikis/Docker#required-variables
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
+    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+    IMAGE_REVISION: ${CI_COMMIT_SHA}
+
+    # Required for pushing
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_REGISTRY_PASSWORD: ${CI_REGISTRY_PASSWORD}
+    DOCKER_REGISTRY_USERNAME: ${CI_REGISTRY_USER}
   extends: 
     - .test
   script:
-    - docker info
+    - ./test-docker/build-then-push.sh

@@ -18,20 +18,20 @@ LABEL org.opencontainers.image.vendor="${IMAGE_VENDOR}"
 ARG IMAGE_SOURCE_REPOSITORY
 LABEL org.opencontainers.image.url="${IMAGE_SOURCE_REPOSITORY}"
 
-# TODO - Document curl as a package in the image
-# This adds 3MB to the package
-RUN apk add curl=7.67.0-r0
-
-# gettext because we want envsubst
-# TODO - Document gettext as a package in the image
-# This adds 8MB to the package
-RUN apk add gettext
-
 ARG IMAGE_TITLE
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
 
 ARG IMAGE_PRODUCT_ID
 LABEL com.netchris.image.productid="${IMAGE_PRODUCT_ID}"
+
+# TODO - Document curl as a package in the image, this adds 3MB to the package
+# TODO - Document gettext as a package in the image - it contributes envsubst, this adds 8MB to the package
+RUN apk --no-cache update \
+	&& apk add --no-cache \
+    curl=7.67.0-r0 \
+    gettext
+
+COPY image_root/ /
 
 ARG IMAGE_REVISION
 LABEL org.opencontainers.image.revision="${IMAGE_REVISION}"
