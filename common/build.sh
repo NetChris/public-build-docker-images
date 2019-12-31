@@ -6,18 +6,12 @@
 # - REF_TAG
 # - BUILD_ID
 
-. "./common/before.sh"
+. "./docker/image_root/opt/netchris/build/scripts/common/sets.sh"
 
-docker image build \
-  -t ${BUILD_IMAGE} \
-  -f ./${VARIANT}/Dockerfile \
-  --build-arg FROM_IMAGE \
-  --build-arg IMAGE_AUTHORS \
-  --build-arg IMAGE_VENDOR \
-  --build-arg IMAGE_TITLE \
-  --build-arg IMAGE_PRODUCT_ID \
-  --build-arg IMAGE_SOURCE_REPOSITORY \
-  --build-arg IMAGE_REVISION \
-  --build-arg IMAGE_BUILD_ID \
-  --build-arg IMAGE_BUILD_DATE \
-  ./${VARIANT}/
+. "./common/variables.sh"
+
+# We use the scripts from the Docker variant as they will be used similarly from the end-use builds
+. "./docker/image_root/opt/netchris/build/scripts/docker/variables/build.sh"
+. "./docker/image_root/opt/netchris/build/scripts/docker/functions.sh"
+
+docker_image_build
