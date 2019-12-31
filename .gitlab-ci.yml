@@ -53,18 +53,15 @@ Tests - Alpine:
   script:
     - curl -X GET https://${CI_REGISTRY}
 
-# TODO - Build an actual test Docker image - based on scratch and just labeling
-# Run a test that essentially re-builds the Docker image _inside_ the newly-pushed Docker image. INCEPTION!!!! :)
 Tests - Docker Build:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
   variables:
     # These variables can be considered the baseline requirements for building
     # See https://gitlab.com/cssl/NetChris/public/build/docker/images/-/wikis/Docker#required-variables
-    VARIANT: docker
     BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
     REF_TAG: ${CI_COMMIT_REF_NAME}
     BUILD_ID: ${CI_PIPELINE_ID}
   extends: 
     - .test
   script:
-    - ./docker/test-build.sh
+    - ./test-docker/build.sh
