@@ -4,8 +4,6 @@ FROM ${FROM_IMAGE}
 ARG FROM_IMAGE
 LABEL com.netchris.image.from="${FROM_IMAGE}"
 
-# TODO - Put "Arrange Dockerfile actions in ascending order of how likely the value will change from build to build." into docs
-
 # The labeling schema.  If this model Dockerfile is changed, update this to the current epoch time.
 LABEL com.netchris.image.labelschema="1576961103"
 
@@ -24,8 +22,6 @@ LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
 ARG IMAGE_PRODUCT_ID
 LABEL com.netchris.image.productid="${IMAGE_PRODUCT_ID}"
 
-# TODO - Document curl as a package in the image, this adds 3MB to the package
-# TODO - Document gettext as a package in the image - it contributes envsubst, this adds 8MB to the package
 RUN apk --no-cache update \
 	&& apk add --no-cache \
     curl=7.67.0-r0 \
