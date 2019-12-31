@@ -6,12 +6,10 @@
 # - REF_TAG
 # - BUILD_ID
 
-. "./docker/image_root/opt/netchris/build/scripts/common/sets.sh"
-
-. "./common/variables.sh"
-
-# We use the scripts from the Docker variant as they will be used similarly from the end-use builds
-. "./docker/image_root/opt/netchris/build/scripts/docker/variables/build.sh"
-. "./docker/image_root/opt/netchris/build/scripts/docker/functions.sh"
+. "./common/includes.sh"
 
 docker_image_build
+
+# Also tag the image with BUILD_IMAGE_BUILD_ID_ONLY 
+echo "Also tagging to $BUILD_IMAGE_BUILD_ID_ONLY"
+docker tag $BUILD_IMAGE $BUILD_IMAGE_BUILD_ID_ONLY
