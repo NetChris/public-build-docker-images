@@ -11,4 +11,5 @@
 docker_image_build
 
 # Also tag the image with BUILD_IMAGE_BUILD_ID_ONLY 
+echo "Also tagging to $BUILD_IMAGE_BUILD_ID_ONLY"
 docker tag $BUILD_IMAGE $BUILD_IMAGE_BUILD_ID_ONLY
