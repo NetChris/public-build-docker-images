@@ -6,6 +6,3 @@ set -e
 
 # treat unset variables as an error and exit immediately
 set -u
-
-# print each command before executing it
-set -x
