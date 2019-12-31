@@ -12,8 +12,7 @@
 . "./common/variables.sh"
 
 # We use the scripts from the Docker variant as they will be used similarly from the end-use builds
-. "./docker/build_scripts/variables.sh"
-
-. "./docker/build_scripts/functions.sh"
+. "./docker/build_scripts/variables/docker-build.sh"
+. "./docker/build_scripts/functions/docker.sh"
 
 docker_image_build
