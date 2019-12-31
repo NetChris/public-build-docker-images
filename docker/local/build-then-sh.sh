@@ -2,8 +2,6 @@
 # Test script
 
 export VARIANT="docker"
-. "./docker/local/build.sh"
+. "./common/local/build.sh"
 
-docker run -it --rm ${BUILD_IMAGE} \
-  /bin/sh
-
+docker run -it --rm ${BUILD_IMAGE} /bin/sh
