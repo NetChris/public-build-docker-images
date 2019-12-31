@@ -59,6 +59,5 @@ Tests - Docker Build:
   extends: 
     - .test
   script:
-    - . "/opt/netchris/build/scripts/common/variables/gitlab.sh"
     - . "/opt/netchris/build/scripts/docker/variables/gitlab.sh"
     - . "./test-docker/build-then-push.sh"
