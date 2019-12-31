@@ -62,6 +62,8 @@ Tests - Docker Build:
     # See https://gitlab.com/cssl/NetChris/public/build/docker/images/-/wikis/Docker#required-variables
     VARIANT: docker
     BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
   extends: 
     - .test
   script:
