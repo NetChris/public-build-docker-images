@@ -5,6 +5,7 @@
 # - BUILD_ID
 # - Login to the registry in BASE_BUILD_IMAGE, if it requires auth
 
-. "./common/before.sh"
+. "./docker/image_root/opt/netchris/build/scripts/docker/variables/build.sh"
+. "./docker/image_root/opt/netchris/build/scripts/docker/functions.sh"
 
-docker image push ${BUILD_IMAGE}
+docker_image_push
