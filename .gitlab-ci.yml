@@ -58,7 +58,10 @@ Tests - Alpine:
 Tests - Docker Build:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
   variables:
+    # These variables can be considered the baseline requirements for building
+    # See https://gitlab.com/cssl/NetChris/public/build/docker/images/-/wikis/Docker#required-variables
     VARIANT: docker
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
   extends: 
     - .test
   script:
