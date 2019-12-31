@@ -3,13 +3,6 @@ stages:
   - Build and Push Image
   - Tests
 
-variables:
-  BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
-  REF_TAG: ${CI_COMMIT_REF_NAME}
-  BUILD_ID: ${CI_PIPELINE_ID}
-  IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
-  IMAGE_REVISION: ${CI_COMMIT_SHA}
-
 .build-then-push:
   image: docker:19.03.1
   services:
@@ -29,6 +22,13 @@ Build and Push - Alpine:
   stage: Build and Push Image
   variables:
     VARIANT: alpine
+
+    # We repeat variables to ensure that the test jobs reflect the variables required for building
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
+    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+    IMAGE_REVISION: ${CI_COMMIT_SHA}
   extends: 
     - .build-then-push
 
@@ -36,6 +36,13 @@ Build and Push - Docker:
   stage: Build and Push Image
   variables:
     VARIANT: docker
+
+    # We repeat variables to ensure that the test jobs reflect the variables required for building
+    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+    REF_TAG: ${CI_COMMIT_REF_NAME}
+    BUILD_ID: ${CI_PIPELINE_ID}
+    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
+    IMAGE_REVISION: ${CI_COMMIT_SHA}
   extends: 
     - .build-then-push
 
@@ -46,6 +53,7 @@ Tests - Alpine:
   script:
     - curl -X GET https://${CI_REGISTRY}
 
+# TODO - Build an actual test Docker image - based on scratch and just labeling
 # Run a test that essentially re-builds the Docker image _inside_ the newly-pushed Docker image. INCEPTION!!!! :)
 Tests - Docker Build:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
