@@ -8,7 +8,6 @@
 . "./common/variables.sh"
 
 . "./opt/scripts/netchris/variables/docker-build.sh"
-
-. "./docker/build_scripts/functions.sh"
+. "./opt/scripts/netchris/functions/docker.sh"
 
 docker_image_build
