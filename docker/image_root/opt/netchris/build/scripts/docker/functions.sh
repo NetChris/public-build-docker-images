@@ -4,6 +4,21 @@
 #  BUILD_IMAGE
 #  VARIANT
 docker_image_build() {
+
+  # output, will also error if the variable is not defined and "set -u" is used
+  echo "Building image: "
+  echo " FROM_IMAGE: ${FROM_IMAGE}"
+  echo " BUILD_IMAGE: ${BUILD_IMAGE}"
+  echo " VARIANT: ${VARIANT}"
+  echo " IMAGE_AUTHORS: ${IMAGE_AUTHORS}"
+  echo " IMAGE_VENDOR: ${IMAGE_VENDOR}"
+  echo " IMAGE_TITLE: ${IMAGE_TITLE}"
+  echo " IMAGE_PRODUCT_ID: ${IMAGE_PRODUCT_ID}"
+  echo " IMAGE_SOURCE_REPOSITORY: ${IMAGE_SOURCE_REPOSITORY}"
+  echo " IMAGE_REVISION: ${IMAGE_REVISION}"
+  echo " IMAGE_BUILD_ID: ${IMAGE_BUILD_ID}"
+  echo " IMAGE_BUILD_DATE: ${IMAGE_BUILD_DATE}"
+
   docker image build \
     -t ${BUILD_IMAGE} \
     -f ./${VARIANT}/Dockerfile \
