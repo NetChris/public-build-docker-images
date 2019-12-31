@@ -56,20 +56,8 @@ Tests - Alpine:
 
 Tests - Docker Build:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
-  variables:
-    # These variables can be considered the baseline requirements for building
-    # See https://gitlab.com/cssl/NetChris/public/build/docker/images/-/wikis/Docker#required-variables
-    BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
-    REF_TAG: ${CI_COMMIT_REF_NAME}
-    BUILD_ID: ${CI_PIPELINE_ID}
-    IMAGE_SOURCE_REPOSITORY: ${CI_PROJECT_URL}
-    IMAGE_REVISION: ${CI_COMMIT_SHA}
-
-    # Required for pushing
-    DOCKER_REGISTRY: ${CI_REGISTRY}
-    DOCKER_REGISTRY_PASSWORD: ${CI_REGISTRY_PASSWORD}
-    DOCKER_REGISTRY_USERNAME: ${CI_REGISTRY_USER}
   extends: 
     - .test
   script:
-    - ./test-docker/build-then-push.sh
+    - . "/opt/netchris/build/scripts/docker/variables/gitlab.sh"
+    - . "./test-docker/build-then-push.sh"
