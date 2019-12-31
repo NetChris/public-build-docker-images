@@ -1,5 +1,5 @@
 #!/bin/sh
-# Tests that can safely be run to ensure proper script configuration.
+# Build the test-docker variant
 
 . "/opt/netchris/build/scripts/common/sets.sh"
 

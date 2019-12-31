@@ -24,3 +24,19 @@ docker_image_build() {
 docker_image_push() {
   docker image push ${BUILD_IMAGE}
 }
+
+# Login to Docker registry.  Requires:
+#  DOCKER_REGISTRY
+#  DOCKER_REGISTRY_PASSWORD
+#  DOCKER_REGISTRY_USERNAME
+docker_login() {
+  # This form is used to avoid the warning normally emitted 
+  # when --password is used instead of --password-stdin
+  echo "${DOCKER_REGISTRY_PASSWORD}" | docker login --username ${DOCKER_REGISTRY_USERNAME} --password-stdin $DOCKER_REGISTRY
+}
+
+# Logout of Docker registry.  Requires:
+#  DOCKER_REGISTRY
+docker_logout() {
+  docker logout $DOCKER_REGISTRY
+}

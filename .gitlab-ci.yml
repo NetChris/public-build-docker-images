@@ -61,7 +61,12 @@ Tests - Docker Build:
     BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
     REF_TAG: ${CI_COMMIT_REF_NAME}
     BUILD_ID: ${CI_PIPELINE_ID}
+
+    # Required for pushing
+    DOCKER_REGISTRY: ${CI_REGISTRY}
+    DOCKER_REGISTRY_PASSWORD: ${CI_REGISTRY_PASSWORD}
+    DOCKER_REGISTRY_USERNAME: ${CI_REGISTRY_USER}
   extends: 
     - .test
   script:
-    - ./test-docker/build.sh
+    - ./test-docker/build-then-push.sh
