@@ -52,6 +52,7 @@ Tests - Alpine:
     - .test
   script:
     - curl -X GET https://${CI_REGISTRY}
+    - envsubst -V
 
 Tests - Docker Build:
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/docker:${CI_PIPELINE_ID}
