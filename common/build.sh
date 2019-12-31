@@ -15,3 +15,6 @@
 . "./docker/image_root/opt/netchris/build/scripts/docker/functions.sh"
 
 docker_image_build
+
+# Also tag the image with BUILD_IMAGE_BUILD_ID_ONLY 
+docker tag $BUILD_IMAGE $BUILD_IMAGE_BUILD_ID_ONLY

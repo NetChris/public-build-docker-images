@@ -9,3 +9,6 @@
 . "./docker/image_root/opt/netchris/build/scripts/docker/functions.sh"
 
 docker_image_push
+
+# Also push the image with BUILD_IMAGE_BUILD_ID_ONLY 
+docker image push ${BUILD_IMAGE_BUILD_ID_ONLY}
