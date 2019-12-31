@@ -29,8 +29,7 @@ RUN apk --no-cache update \
 	&& apk add --no-cache \
     curl=7.67.0-r0
 
-COPY ../common/build_scripts /opt/netchris/build/common/scripts
-COPY build_scripts/ /opt/netchris/build/alpine/scripts
+COPY image_root/ /
 
 ARG IMAGE_REVISION
 LABEL org.opencontainers.image.revision="${IMAGE_REVISION}"
