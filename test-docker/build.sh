@@ -4,11 +4,10 @@
 . "/opt/netchris/build/scripts/common/sets.sh"
 
 export VARIANT="test-docker"
-
-. "./common/variables.sh"
+export IMAGE_PRODUCT_ID="cssl/netchris/public/build/docker/images/${VARIANT}"
+. "./${VARIANT}/variables.sh"
 
 . "/opt/netchris/build/scripts/docker/variables/build.sh"
-
 . "/opt/netchris/build/scripts/docker/functions.sh"
 
 docker_image_build
