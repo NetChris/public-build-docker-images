@@ -1,36 +1,31 @@
 #!/bin/sh
 # Run a build job in Docker
 #
-# Requires:
-#  BUILD_ENVIRONMENT_IMAGE
-#  CONTAINER_PATH
-#  REF_TAG
-#  BUILD_ID
-#  BASE_BUILD_IMAGE
-#  IMAGE_SOURCE_REPOSITORY
-#  IMAGE_REVISION
-#  DOCKER_REGISTRY
-#  DOCKER_REGISTRY_PASSWORD
-#  DOCKER_REGISTRY_USERNAME
-#  CONTAINER_SCRIPT
+# Requires environment variables:
+#   BUILD_ENVIRONMENT_IMAGE
+#   CONTAINER_PATH
+#   CONTAINER_SCRIPT
+#   DOCKER_RUN_ENVARS - List of environment variables to provide to the docker container
 #
-# Then execute:
+# Once set up, execute:
 #   curl -sSL https://gitlab.com/cssl/NetChris/public/build/docker/images/raw/master/published-scripts/docker-job.sh | sh -e
 
-# exit immediately when a command fails
-# treat unset variables as an error and exit immediately
+# exit immediately when a command fails and treat unset variables as an error and exit immediately
 set -eu
+
+# Additional envars, using a temp file
+DOCKER_RUN_ENV_FILE=$(mktemp)
+
+for envar_name in $DOCKER_RUN_ENVARS; do
+  eval envar_value='$'$envar_name
+  echo "$envar_name=$envar_value" >> $DOCKER_RUN_ENV_FILE
+done
 
 docker run --rm \
   -v $(pwd):${CONTAINER_PATH} \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  --env REF_TAG \
-  --env BUILD_ID \
-  --env BASE_BUILD_IMAGE \
-  --env IMAGE_SOURCE_REPOSITORY \
-  --env IMAGE_REVISION \
-  --env DOCKER_REGISTRY \
-  --env DOCKER_REGISTRY_PASSWORD \
-  --env DOCKER_REGISTRY_USERNAME \
+  --env-file ${DOCKER_RUN_ENV_FILE} \
   ${BUILD_ENVIRONMENT_IMAGE} \
   /bin/sh -c "cd ${CONTAINER_PATH} && ${CONTAINER_SCRIPT}"
+
+rm $DOCKER_RUN_ENV_FILE
