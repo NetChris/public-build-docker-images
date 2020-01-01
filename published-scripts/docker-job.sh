@@ -21,8 +21,6 @@ for envar_name in $DOCKER_RUN_ENVARS; do
   echo "$envar_name=$envar_value" >> $DOCKER_RUN_ENV_FILE
 done
 
-cat $DOCKER_RUN_ENV_FILE
-
 docker run --rm \
   -v $(pwd):${CONTAINER_PATH} \
   -v /var/run/docker.sock:/var/run/docker.sock \
