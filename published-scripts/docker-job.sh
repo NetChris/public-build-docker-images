@@ -24,9 +24,6 @@ done
 # Leverage mktemp to generate a random directory path (but not actually create anything)
 TEMP_CONTAINER_PATH=$(mktemp -du)
 
-# TODO - Remove
-echo "DEBUG: Using $TEMP_CONTAINER_PATH"
-
 docker run --rm \
   -v $(pwd):${TEMP_CONTAINER_PATH} \
   -v /var/run/docker.sock:/var/run/docker.sock \
