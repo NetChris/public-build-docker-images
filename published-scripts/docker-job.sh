@@ -21,11 +21,16 @@ for envar_name in $DOCKER_RUN_ENVARS; do
   echo "$envar_name=$envar_value" >> $DOCKER_RUN_ENV_FILE
 done
 
+# Leverage mktemp to generate a random directory path
+TEMP_CONTAINER_PATH=$(mktemp -d)
+# Remove the actual directory (while still retaining the string value)
+rmdir $TEMP_CONTAINER_PATH
+
 docker run --rm \
-  -v $(pwd):${CONTAINER_PATH} \
+  -v $(pwd):${TEMP_CONTAINER_PATH} \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --env-file ${DOCKER_RUN_ENV_FILE} \
   ${BUILD_ENVIRONMENT_IMAGE} \
-  /bin/sh -c "cd ${CONTAINER_PATH} && ${CONTAINER_SCRIPT}"
+  /bin/sh -c "cd ${TEMP_CONTAINER_PATH} && ${CONTAINER_SCRIPT}"
 
 rm $DOCKER_RUN_ENV_FILE
