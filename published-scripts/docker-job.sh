@@ -21,10 +21,8 @@ for envar_name in $DOCKER_RUN_ENVARS; do
   echo "$envar_name=$envar_value" >> $DOCKER_RUN_ENV_FILE
 done
 
-# Leverage mktemp to generate a random directory path
-TEMP_CONTAINER_PATH=$(mktemp -d)
-# Remove the actual directory (while still retaining the string value)
-rmdir $TEMP_CONTAINER_PATH
+# Leverage mktemp to generate a random directory path (but not actually create anything)
+TEMP_CONTAINER_PATH=$(mktemp -du)
 
 docker run --rm \
   -v $(pwd):${TEMP_CONTAINER_PATH} \
