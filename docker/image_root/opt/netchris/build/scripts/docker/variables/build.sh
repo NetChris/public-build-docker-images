@@ -11,3 +11,4 @@ export BUILD_IMAGE=${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${IMAGE_BUILD_ID}
 export BUILD_IMAGE_BUILD_ID_ONLY=${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${BUILD_ID}
 export IMAGE_AUTHORS="NetChris Corp. <dockerimages@netchris.com>"
 export IMAGE_BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+export IMAGE_PRODUCT_ID="${BASE_BUILD_IMAGE}/${VARIANT}"
