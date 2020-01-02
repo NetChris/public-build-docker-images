@@ -1,15 +1,16 @@
 #!/bin/sh
 
-# Build a Docker image with NetChris-standard variables:
+# Build a Docker image
+# Requires:
 #  BUILD_IMAGE
-#  VARIANT
+#  IMAGE_BUILD_SUBDIRECTORY
 docker_image_build() {
 
   # output, will also error if the variable is not defined and "set -u" is used
   echo "Building image: "
   echo " FROM_IMAGE: ${FROM_IMAGE}"
   echo " BUILD_IMAGE: ${BUILD_IMAGE}"
-  echo " VARIANT: ${VARIANT}"
+  echo " IMAGE_BUILD_SUBDIRECTORY: ${IMAGE_BUILD_SUBDIRECTORY}"
   echo " IMAGE_AUTHORS: ${IMAGE_AUTHORS}"
   echo " IMAGE_VENDOR: ${IMAGE_VENDOR}"
   echo " IMAGE_TITLE: ${IMAGE_TITLE}"
@@ -21,7 +22,7 @@ docker_image_build() {
 
   docker image build \
     -t ${BUILD_IMAGE} \
-    -f ./${VARIANT}/Dockerfile \
+    -f ./${IMAGE_BUILD_SUBDIRECTORY}/Dockerfile \
     --build-arg FROM_IMAGE \
     --build-arg IMAGE_AUTHORS \
     --build-arg IMAGE_VENDOR \
@@ -31,16 +32,18 @@ docker_image_build() {
     --build-arg IMAGE_REVISION \
     --build-arg IMAGE_BUILD_ID \
     --build-arg IMAGE_BUILD_DATE \
-    ./${VARIANT}/
+    ./${IMAGE_BUILD_SUBDIRECTORY}/
 }
 
-# Push a Docker image with NetChris-standard variables:
+# Push a Docker image
+# Requires:
 #  BUILD_IMAGE
 docker_image_push() {
   docker image push ${BUILD_IMAGE}
 }
 
-# Login to Docker registry.  Requires:
+# Login to Docker registry
+# Requires:
 #  DOCKER_REGISTRY
 #  DOCKER_REGISTRY_PASSWORD
 #  DOCKER_REGISTRY_USERNAME
@@ -50,7 +53,8 @@ docker_login() {
   echo "${DOCKER_REGISTRY_PASSWORD}" | docker login --username ${DOCKER_REGISTRY_USERNAME} --password-stdin $DOCKER_REGISTRY
 }
 
-# Logout of Docker registry.  Requires:
+# Logout of Docker registry
+# Requires:
 #  DOCKER_REGISTRY
 docker_logout() {
   docker logout $DOCKER_REGISTRY
