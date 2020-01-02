@@ -6,5 +6,6 @@
 # - BUILD_ID
 
 export IMAGE_PRODUCT_ID="cssl/netchris/public/build/docker/images/${VARIANT}"
+export IMAGE_BUILD_SUBDIRECTORY=${VARIANT}
 
-. "./${VARIANT}/variables.sh"
+. "./${IMAGE_BUILD_SUBDIRECTORY}/variables.sh"
