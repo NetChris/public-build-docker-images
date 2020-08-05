@@ -5,6 +5,8 @@ stages:
 
 .build-then-push:
   image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
   script:
     # TODO - Use a script
     - ./common/build.sh
