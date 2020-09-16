@@ -4,4 +4,4 @@
 
 ## Documentation
 
-- See [the wiki](https://gitlab.com/cssl/NetChris/public/build/docker/images/-/wikis/home) for detailed documentaion.
+- See [the `cssl/reference` wiki](https://gitlab.com/cssl/reference/-/wikis/home) for detailed documentaion.
