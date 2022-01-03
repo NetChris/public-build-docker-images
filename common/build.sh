@@ -1,6 +1,6 @@
 #!/bin/sh
 # Requires
-# - DOCKER_IMAGE_PARENT
+# - FROM_IMAGE
 # - VARIANT
 # - BASE_BUILD_IMAGE
 # - REF_TAG
