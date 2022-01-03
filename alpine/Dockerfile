@@ -24,7 +24,7 @@ LABEL com.netchris.image.productid="${IMAGE_PRODUCT_ID}"
 
 RUN apk --no-cache update \
 	&& apk add --no-cache \
-    curl=7.67.0-r0 \
+    curl \
     gettext
 
 COPY image_root/ /
