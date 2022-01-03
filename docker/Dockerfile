@@ -1,34 +1,34 @@
-ARG FROM_IMAGE
-FROM ${FROM_IMAGE}
+ARG DOCKER_IMAGE_PARENT
+FROM ${DOCKER_IMAGE_PARENT}
 
-ARG FROM_IMAGE
-LABEL com.netchris.image.from="${FROM_IMAGE}"
+ARG DOCKER_IMAGE_PARENT
+LABEL com.netchris.image.from="${DOCKER_IMAGE_PARENT}"
 
 # The labeling schema.  If this model Dockerfile is changed, update this to the current epoch time.
 LABEL com.netchris.image.labelschema="1576961103"
 
-ARG IMAGE_AUTHORS
-LABEL org.opencontainers.image.authors="${IMAGE_AUTHORS}"
+ARG DOCKER_IMAGE_AUTHORS
+LABEL org.opencontainers.image.authors="${DOCKER_IMAGE_AUTHORS}"
 
-ARG IMAGE_VENDOR
-LABEL org.opencontainers.image.vendor="${IMAGE_VENDOR}"
+ARG DOCKER_IMAGE_VENDOR
+LABEL org.opencontainers.image.vendor="${DOCKER_IMAGE_VENDOR}"
 
-ARG IMAGE_SOURCE_REPOSITORY
-LABEL org.opencontainers.image.url="${IMAGE_SOURCE_REPOSITORY}"
+ARG DOCKER_IMAGE_URL
+LABEL org.opencontainers.image.url="${DOCKER_IMAGE_URL}"
 
-ARG IMAGE_TITLE
-LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
+ARG DOCKER_IMAGE_TITLE
+LABEL org.opencontainers.image.title="${DOCKER_IMAGE_TITLE}"
 
 ARG IMAGE_PRODUCT_ID
 LABEL com.netchris.image.productid="${IMAGE_PRODUCT_ID}"
 
 COPY image_root/ /
 
-ARG IMAGE_REVISION
-LABEL org.opencontainers.image.revision="${IMAGE_REVISION}"
+ARG DOCKER_IMAGE_REVISION
+LABEL org.opencontainers.image.revision="${DOCKER_IMAGE_REVISION}"
 
-ARG IMAGE_BUILD_ID
-LABEL com.netchris.image.build="${IMAGE_BUILD_ID}"
+ARG BUILD_ID
+LABEL com.netchris.image.build="${BUILD_ID}"
 
-ARG IMAGE_BUILD_DATE
-LABEL org.opencontainers.image.created="${IMAGE_BUILD_DATE}"
+ARG BUILD_DATE
+LABEL org.opencontainers.image.created="${BUILD_DATE}"

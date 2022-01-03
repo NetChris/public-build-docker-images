@@ -8,30 +8,30 @@ docker_image_build() {
 
   # output, will also error if the variable is not defined and "set -u" is used
   echo "Building image: "
-  echo " FROM_IMAGE: ${FROM_IMAGE}"
+  echo " DOCKER_IMAGE_PARENT: ${DOCKER_IMAGE_PARENT}"
   echo " BUILD_IMAGE: ${BUILD_IMAGE}"
   echo " IMAGE_BUILD_SUBDIRECTORY: ${IMAGE_BUILD_SUBDIRECTORY}"
-  echo " IMAGE_AUTHORS: ${IMAGE_AUTHORS}"
-  echo " IMAGE_VENDOR: ${IMAGE_VENDOR}"
-  echo " IMAGE_TITLE: ${IMAGE_TITLE}"
+  echo " DOCKER_IMAGE_AUTHORS: ${DOCKER_IMAGE_AUTHORS}"
+  echo " DOCKER_IMAGE_VENDOR: ${DOCKER_IMAGE_VENDOR}"
+  echo " DOCKER_IMAGE_TITLE: ${DOCKER_IMAGE_TITLE}"
   echo " IMAGE_PRODUCT_ID: ${IMAGE_PRODUCT_ID}"
-  echo " IMAGE_SOURCE_REPOSITORY: ${IMAGE_SOURCE_REPOSITORY}"
-  echo " IMAGE_REVISION: ${IMAGE_REVISION}"
-  echo " IMAGE_BUILD_ID: ${IMAGE_BUILD_ID}"
-  echo " IMAGE_BUILD_DATE: ${IMAGE_BUILD_DATE}"
+  echo " DOCKER_IMAGE_URL: ${DOCKER_IMAGE_URL}"
+  echo " DOCKER_IMAGE_REVISION: ${DOCKER_IMAGE_REVISION}"
+  echo " BUILD_ID: ${BUILD_ID}"
+  echo " BUILD_DATE: ${BUILD_DATE}"
 
   docker image build \
     -t ${BUILD_IMAGE} \
     -f ./${IMAGE_BUILD_SUBDIRECTORY}/Dockerfile \
-    --build-arg FROM_IMAGE \
-    --build-arg IMAGE_AUTHORS \
-    --build-arg IMAGE_VENDOR \
-    --build-arg IMAGE_TITLE \
+    --build-arg DOCKER_IMAGE_PARENT \
+    --build-arg DOCKER_IMAGE_AUTHORS \
+    --build-arg DOCKER_IMAGE_VENDOR \
+    --build-arg DOCKER_IMAGE_TITLE \
     --build-arg IMAGE_PRODUCT_ID \
-    --build-arg IMAGE_SOURCE_REPOSITORY \
-    --build-arg IMAGE_REVISION \
-    --build-arg IMAGE_BUILD_ID \
-    --build-arg IMAGE_BUILD_DATE \
+    --build-arg DOCKER_IMAGE_URL \
+    --build-arg DOCKER_IMAGE_REVISION \
+    --build-arg BUILD_ID \
+    --build-arg BUILD_DATE \
     ./${IMAGE_BUILD_SUBDIRECTORY}/
 }
 
