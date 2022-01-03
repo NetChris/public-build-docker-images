@@ -15,5 +15,11 @@
     "statusBar.foreground": "#e7e7e7",
     "activityBar.activeBackground": "#00b1eb"
   },
-  "peacock.remoteColor": "#008bb8"
+  "peacock.remoteColor": "#008bb8",
+  "markdownlint.config": {
+    "MD028": false,
+    "MD025": {
+      "front_matter_title": ""
+    }
+  }
 }
