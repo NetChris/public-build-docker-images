@@ -4,7 +4,9 @@ stages:
   - Tests
 
 .build-then-push:
-  image: docker:19.03.1-dind
+  image: docker:20
+  services:
+    - docker:20-dind
   script:
     # TODO - Use a script
     - ./common/build.sh
