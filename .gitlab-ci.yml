@@ -13,6 +13,7 @@ variables:
   REF_TAG: ${CI_COMMIT_REF_SLUG}
   BUILD_ID: ${CI_PIPELINE_ID}
   DOCKER_IMAGE_URL: ${CI_PROJECT_URL}
+  DOCKER_IMAGE_PUSHED: ${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${CI_PIPELINE_ID}
 
 .build-then-push:
   image: docker:20
@@ -39,11 +40,11 @@ Build and Push - docker-build-powershell:
   extends: 
     - .build-then-push
 
-Tests - docker-build-powershell:
+Tests - Run script in container:
   needs:
     - job: "Build and Push - docker-build-powershell"
       artifacts: false
-  image: ${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${CI_PIPELINE_ID}
+  image: ${DOCKER_IMAGE_PUSHED}
   variables:
     VARIANT: docker-build-powershell
   extends: 
