@@ -12,7 +12,7 @@ export DOCKER_IMAGE_PARENT="docker:${DOCKER_VERSION}"
 # - Do not use variable expansion
 # - Avoid changing them if possible
 export DOCKER_IMAGE_VENDOR="Docker"
-export DOCKER_IMAGE_PRODUCT_ID="TODO"
+export DOCKER_IMAGE_PRODUCT_ID="netchris.build.docker.powershell"
 export DOCKER_IMAGE_DESCRIPTION="Docker Image for building Docker containers.  Includes git and PowerShell Core installed on the base docker image."
 export DOCKER_IMAGE_DOCUMENTATION_URL="https://gitlab.com/cssl/NetChris/public/build/docker/images/-/blob/master/README.md"
 
