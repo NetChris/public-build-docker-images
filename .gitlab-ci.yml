@@ -1,0 +1,65 @@
+---
+stages:
+  - Build and Push Image
+  - Tests
+
+# TODO - Go through variables and remove what's not needed
+variables:
+  BUILD_URL: $CI_PIPELINE_URL
+  BUILD_DATE: $CI_PIPELINE_CREATED_AT
+  DOCKER_IMAGE_REVISION: ${CI_COMMIT_SHA}
+  DOCKER_IMAGE_SOURCE: ${CI_REPOSITORY_URL}
+  BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
+  REF_TAG: ${CI_COMMIT_REF_NAME}
+  BUILD_ID: ${CI_PIPELINE_ID}
+  DOCKER_IMAGE_URL: ${CI_PROJECT_URL}
+
+.build-then-push:
+  image: docker:20
+  services:
+    - docker:20-dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    # TODO - Use a script
+    - ./common/build.sh
+    - ./common/push.sh
+  after_script:
+    - docker logout $CI_REGISTRY
+
+.test:
+  stage: Tests
+  tags:
+    - NetChris
+
+# Build and Push - alpine:
+#   stage: Build and Push Image
+#   variables:
+#     VARIANT: alpine
+#   extends: 
+#     - .build-then-push
+
+Build and Push - docker-build-powershell:
+  stage: Build and Push Image
+  # TODO - Go through variables and remove what's not needed
+  variables:
+    VARIANT: docker-build-powershell
+  extends: 
+    - .build-then-push
+
+# Tests - alpine:
+#   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/alpine:${CI_PIPELINE_ID}
+#   extends: 
+#     - .test
+#   script:
+#     - curl -X GET https://${CI_REGISTRY}
+#     - envsubst -V
+
+Tests - docker-build-powershell:
+  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/${VARIANT}:${CI_PIPELINE_ID}
+  variables:
+    VARIANT: docker-build-powershell
+  extends: 
+    - .test
+  script:
+    - Get-PSRepository
