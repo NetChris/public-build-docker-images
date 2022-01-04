@@ -50,7 +50,7 @@ RUN apk --no-cache update \
   && ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
 # Start PowerShell
-CMD [ "pwsh" ]
+ENTRYPOINT [ "pwsh" ]
 
 # *****************************************************************************
 # Unless absolutely necessary, do not change anything below this line
