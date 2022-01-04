@@ -34,13 +34,15 @@ variables:
 
 Build and Push - docker-build-powershell:
   stage: Build and Push Image
-  # TODO - Go through variables and remove what's not needed
   variables:
     VARIANT: docker-build-powershell
   extends: 
     - .build-then-push
 
 Tests - docker-build-powershell:
+  needs:
+    - job: "Build and Push - docker-build-powershell"
+      artifacts: false
   image: ${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${CI_PIPELINE_ID}
   variables:
     VARIANT: docker-build-powershell
