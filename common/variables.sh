@@ -9,3 +9,7 @@ export IMAGE_PRODUCT_ID="cssl/netchris/public/build/docker/images/${VARIANT}"
 export IMAGE_BUILD_SUBDIRECTORY=${VARIANT}
 
 . "./${IMAGE_BUILD_SUBDIRECTORY}/variables.sh"
+
+export BUILD_IMAGE=${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${BUILD_ID}
+export DOCKER_IMAGE_AUTHORS="NetChris Corp. <dockerimages@netchris.com>"
+export IMAGE_PRODUCT_ID="${BASE_BUILD_IMAGE}/${VARIANT}"

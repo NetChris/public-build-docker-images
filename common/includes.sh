@@ -1,6 +1,5 @@
 #!/bin/sh
 
 . "./common/sets.sh"
-. "./common/variables-general.sh"
-. "./common/variables-build.sh"
+. "./common/variables.sh"
 . "./common/functions.sh"
