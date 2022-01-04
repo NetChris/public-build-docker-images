@@ -10,7 +10,7 @@ variables:
   DOCKER_IMAGE_REVISION: ${CI_COMMIT_SHA}
   DOCKER_IMAGE_SOURCE: ${CI_REPOSITORY_URL}
   BASE_BUILD_IMAGE: ${CI_REGISTRY_IMAGE}
-  REF_TAG: ${CI_COMMIT_REF_NAME}
+  REF_TAG: ${CI_COMMIT_REF_SLUG}
   BUILD_ID: ${CI_PIPELINE_ID}
   DOCKER_IMAGE_URL: ${CI_PROJECT_URL}
 
@@ -32,13 +32,6 @@ variables:
   tags:
     - NetChris
 
-# Build and Push - alpine:
-#   stage: Build and Push Image
-#   variables:
-#     VARIANT: alpine
-#   extends: 
-#     - .build-then-push
-
 Build and Push - docker-build-powershell:
   stage: Build and Push Image
   # TODO - Go through variables and remove what's not needed
@@ -47,16 +40,8 @@ Build and Push - docker-build-powershell:
   extends: 
     - .build-then-push
 
-# Tests - alpine:
-#   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/alpine:${CI_PIPELINE_ID}
-#   extends: 
-#     - .test
-#   script:
-#     - curl -X GET https://${CI_REGISTRY}
-#     - envsubst -V
-
 Tests - docker-build-powershell:
-  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/${VARIANT}:${CI_PIPELINE_ID}
+  image: ${BASE_BUILD_IMAGE}/${REF_TAG}/${VARIANT}:${CI_PIPELINE_ID}
   variables:
     VARIANT: docker-build-powershell
   extends: 
