@@ -49,8 +49,9 @@ RUN apk --no-cache update \
   && chmod +x /opt/microsoft/powershell/7/pwsh \
   && ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
-# Start PowerShell
-CMD [ "pwsh" ]
+RUN mkdir -p /opt/netchris/build_tools
+COPY build_tools/ /opt/netchris/build_tools
+ENV PATH="/opt/netchris/build_tools:${PATH}"
 
 # *****************************************************************************
 # Unless absolutely necessary, do not change anything below this line

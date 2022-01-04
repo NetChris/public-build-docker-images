@@ -62,4 +62,4 @@ Tests - docker-build-powershell:
   extends: 
     - .test
   script:
-    - pwsh Get-PSRepository
+    - test-image-build.ps1
